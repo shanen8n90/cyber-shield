@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberShield Security</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <style>
+        /* ----------------------------
+           GLOBAL STYLES
+        ----------------------------- */
+        :root {
+    --chat--color--primary: #0d1b2a;
+    --chat--color--primary-shade-50: #db4061;
+    --chat--color--primary--shade-100: #cf3c5c;
+    --chat--color--secondary: #20b69e;
+    --chat--color-secondary-shade-50: #1ca08a;
+    --chat--color-white: #ffffff;
+    --chat--color-light: #f2f4f8;
+    --chat--color-light-shade-50: #e6e9f1;
+    --chat--color-light-shade-100: #c2c5cc;
+    --chat--color-medium: #d2d4d9;
+    --chat--color-dark: #0d1b2a;
+    --chat--color-disabled: #777980;
+    --chat--color-typing: #404040;
+
+    --chat--spacing: .25rem;
+    --chat--border-radius: 0.25rem;
+    --chat--transition-duration: 0.15s;
+
+    --chat--window--width: 400px;
+    --chat--window--height: 600px;
+
+    --chat--header-height: auto;
+    --chat--header--padding: var(--chat--spacing);
+    --chat--header--background: var(--chat--color-dark);
+    --chat--header--color: var(--chat--color-light);
+    --chat--header--border-top: none;
+    --chat--header--border-bottom: none;
+    --chat--header--border-bottom: none;
+    --chat--header--border-bottom: none;
+    --chat--heading--font-size: 2em;
+    --chat--header--color: var(--chat--color-light);
+    --chat--subtitle--font-size: inherit;
+    --chat--subtitle--line-height: 1.8;
+
+    --chat--textarea--height: 50px;
+
+    --chat--message--font-size: 1rem;
+    --chat--message--padding: var(--chat--spacing);
+    --chat--message--border-radius: var(--chat--border-radius);
+    --chat--message-line-height: 1.8;
+    --chat--message--bot--background: var(--chat--color-white);
+    --chat--message--bot--color: var(--chat--color-dark);
+    --chat--message--bot--border: none;
+    --chat--message--user--background: var(--chat--color--secondary);
+    --chat--message--user--color: var(--chat--color-white);
+    --chat--message--user--border: none;
+    --chat--message--pre--background: rgba(0, 0, 0, 0.05);
+
+    --chat--toggle--background: var(--chat--color--primary);
+    --chat--toggle--hover--background: var(--chat--color--primary-shade-50);
+    --chat--toggle--active--background: var(--chat--color--primary--shade-100);
+    --chat--toggle--color: var(--chat--color-white);
+    --chat--toggle--size: 64px;
+}
+
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background: #f6f7fb;
+            color: #222;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* ----------------------------
+           NAVBAR
+        ----------------------------- */
+        nav {
+            background: #0d1b2a;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        nav .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: #39a0ff;
+        }
+
+        /* ----------------------------
+           HERO SECTION
+        ----------------------------- */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin: 15px 0 30px;
+        }
+
+        .btn {
+            background: #39a0ff;
+            padding: 12px 25px;
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d8ae0;
+        }
+
+        /* ----------------------------
+           ABOUT SECTION
+        ----------------------------- */
+        .about {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .about p {
+            width: 70%;
+            margin: 20px auto;
+            line-height: 1.6;
+        }
+
+        /* ----------------------------
+           FEATURES / SERVICES SECTION
+        ----------------------------- */
+        .features {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .feature-card i {
+            font-size: 40px;
+            color: #39a0ff;
+            margin-bottom: 15px;
+        }
+
+        /* ----------------------------
+           CONTACT SECTION
+        ----------------------------- */
+        .contact {
+            padding: 80px 0;
+            background: #edf2f7;
+        }
+
+        .contact form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+
+        .contact input, .contact textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .contact button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #39a0ff;
+            color: white;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .contact button:hover {
+            background: #1d8ae0;
+        }
+
+        /* ----------------------------
+           FOOTER
+        ----------------------------- */
+        footer {
+            background: #0d1b2a;
+            color: #d9d9d9;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .social-icons {
+            margin: 15px 0;
+        }
+
+        .social-icons i {
+            font-size: 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .social-icons i:hover {
+            color: #39a0ff;
+        }
+
+        /* ----------------------------
+           MOBILE NAVIGATION (optional)
+        ----------------------------- */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none; /* hide menu for simplicity */
+            }
+        }
+
+    </style>
+
+    <!-- Optional Icons (FontAwesome) -->
+    <script src="https://kit.fontawesome.com/a2e0e6ad5f.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- ===============================
+         NAVIGATION
+    ================================ -->
+    <nav>
+        <div class="container nav-inner">
+            <div class="logo">CyberShield</div>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===============================
+         HERO SECTION
+    ================================ -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <h1>Your Shield Against Cyber Threats</h1>
+            <p>Protecting businesses and individuals with modern cybersecurity solutions.</p>
+            <a href="#features" class="btn">Our Services</a>
+        </div>
+    </section>
+
+    <!-- ===============================
+         ABOUT SECTION
+    ================================ -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>About CyberShield</h2>
+            <p>
+                CyberShield is a cybersecurity platform dedicated to defending your digital 
+                identity and infrastructure. From threat detection to vulnerability analysis, 
+                we help you stay secure in an ever-evolving digital world.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===============================
+         FEATURES / SERVICES
+    ================================ -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 style="text-align:center;">Our Cybersecurity Services</h2>
+
+            <div class="features-grid">
+                <!-- Each card represents a cybersecurity service -->
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Threat Detection</h3>
+                    <p>Identify and stop cyber threats before they impact your system.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-user-lock"></i>
+                    <h3>Identity Protection</h3>
+                    <p>Safeguard your digital identity from breaches and theft attempts.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Network Security</h3>
+                    <p>Secure your home or business network against unauthorized access.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-search"></i>
+                    <h3>Vulnerability Scanning</h3>
+                    <p>Discover weak points in your infrastructure before hackers do.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===============================
+         CONTACT SECTION
+    ================================ -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 style="text-align:center;">Contact Us</h2>
+            <form>
+                <!-- Simple contact form -->
+                <input type="text" placeholder="Your Name" required />
+                <input type="email" placeholder="Your Email" required />
+                <textarea rows="5" placeholder="Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===============================
+         FOOTER
+    ================================ -->
+    <footer>
+        <p>&copy; 2025 CyberShield Security — All Rights Reserved</p>
+
+        <div class="social-icons">
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-github"></i>
+            <i class="fab fa-linkedin"></i>
+        </div>
+    </footer>
+
+</body>
+
+   
+<script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+    webhookUrl: 'https://trainingatoro.app.n8n.cloud/webhook/02407542-42e0-4dad-bc35-0666ffe68656/chat',
+    webhookConfig: {
+        method: 'POST',
+        headers: {}
+    },
+    target: '#n8n-chat',
+    mode: 'window',
+    chatInputKey: 'chatInput',
+    chatSessionKey: 'sessionId',
+    loadPreviousSession: true,
+    metadata: {},
+    showWelcomeScreen: false,
+    defaultLanguage: 'en',
+    initialMessages: [
+        'Hi there I am Cyber-Shield Chatbot'
+    ],
+    i18n: {
+        en: {
+            title: 'Cyber-Shield Bot',
+            subtitle: "Here to help you 24/7.",
+            footer: '',
+            getStarted: 'New Conversation',
+            inputPlaceholder: 'How may i assist you today?',
+        },
+    },
+    enableStreaming: false,
+});
+
+</script>
+
+</html>
